@@ -1,12 +1,17 @@
 package com.example.mopa.thymeleaf.services;
 
 import com.example.mopa.thymeleaf.domain.LoginRegistrationEntity;
+import com.example.mopa.thymeleaf.domain.OrganizationEntity;
 import com.example.mopa.thymeleaf.dto.request.LoginRegistrationDTO;
+import com.example.mopa.thymeleaf.dto.response.LoginRegistrationResponseDTO;
+import com.example.mopa.thymeleaf.dto.response.OrgResponseDTO;
 import com.example.mopa.thymeleaf.repository.LoginRegistrationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -46,7 +51,23 @@ public class LoginRegistrationService {
     }
 
 
+    public List<LoginRegistrationResponseDTO> getAllUserList(){
 
+        List<LoginRegistrationResponseDTO> userList = new ArrayList<>();
+
+        List<LoginRegistrationEntity> entityList = orgRepository.findAll();
+
+        entityList.forEach(response->{
+            LoginRegistrationResponseDTO objectResponse = new LoginRegistrationResponseDTO();
+            objectResponse.setId(response.getId());
+            objectResponse.setEmail(response.getEmail());
+            objectResponse.setPhoneNumber(response.getPhoneNumber());
+
+            userList.add(objectResponse);
+        });
+
+        return userList;
+    }
 
 }
 

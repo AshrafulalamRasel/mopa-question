@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/basic}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css">
+    <link href="https://harvesthq.github.io/chosen/chosen.css" rel="stylesheet"/>
+
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="text-center">
+        <samp class="text-center m-lg-2">Adding Role</samp>
+    </div>
+    <div class="container mt-3">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" th:action="@{/role-view/add}" class="mx-auto w-50" th:object="${addRole}">
+                    <th:block th:include="fragment/error-message.html"></th:block>
+                    <fieldset>
+
+                        <div class="row">
+                            <div class="col-sm-6 mb-3">
+                                <label>Select Role Name:</label>
+                                <select class="form-control" th:field="*{roleName}"
+                                        th:classappend="${#fields.hasErrors('roleName')}? 'is-invalid'">
+                                    <option value="default">Select Role Type..</option>
+                                    <option th:each="role : ${T(com.example.mopa.thymeleaf.domain.RoleName).values()}"
+                                            th:value="${role}" th:text="${role}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <label>Role Code</label>
+                                <input type="text" class="form-control" placeholder="Enter the Role Code..."
+                                       th:field="*{roleCode}"
+                                       th:classappend="${#fields.hasErrors('roleCode')}? 'is-invalid'">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 mb-3">
+                                <label>Select User:</label>
+                                <select class="form-control" th:field="*{loginRegistrationEntity}"
+                                        th:classappend="${#fields.hasErrors('loginRegistrationEntity')}? 'is-invalid'">
+                                    <option value="default">Select User Type..</option>
+                                    <option th:each="operator : ${responseObject}" th:value="${operator.id}"
+                                            th:text="${operator.phoneNumber}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <a th:href="@{/role-view}" class="btn btn-outline-secondary w-100">
+                                Back
+                            </a>
+                        </div>
+                        <div class="col-sm-6">
+                            <button type="submit" class="btn btn-outline-success w-100">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<th:block layout:fragment="scripts">
+
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+    &lt;!&ndash;<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>&ndash;&gt;
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
+    <script src="https://harvesthq.github.io/chosen/docsupport/jquery-3.2.1.min.js"></script>
+    <script src="https://harvesthq.github.io/chosen/chosen.jquery.js"></script>
+
+
+    <script type="text/javascript">
+        $(function () {
+            $('select').chosen();
+        });
+    </script>
+</th:block>
+</body>
+</html>
