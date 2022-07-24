@@ -29,36 +29,12 @@
                     <fieldset>
 
                         <div class="row">
-                            <div class="col-sm-6 mb-3">
-                                <label>Select Role Name:</label>
-                                <select class="form-control" th:field="*{roleName}"
-                                        th:classappend="${#fields.hasErrors('roleName')}? 'is-invalid'">
-                                    <option value="default">Select Role Type..</option>
-                                    <option th:each="role : ${T(com.example.mopa.thymeleaf.domain.RoleName).values()}"
-                                            th:value="${role}" th:text="${role}"></option>
-                                </select>
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="form2Example2">Role Name:</label>
+                                <input type="text" class="form-control" placeholder="Enter the Role Name..." th:field="*{name}" th:classappend="${#fields.hasErrors('name')}? 'is-invalid'">
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-sm-12 mb-3">
-                                <label>Role Code</label>
-                                <input type="text" class="form-control" placeholder="Enter the Role Code..."
-                                       th:field="*{roleCode}"
-                                       th:classappend="${#fields.hasErrors('roleCode')}? 'is-invalid'">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 mb-3">
-                                <label>Select User:</label>
-                                <select class="form-control" th:field="*{loginRegistrationEntity}"
-                                        th:classappend="${#fields.hasErrors('loginRegistrationEntity')}? 'is-invalid'">
-                                    <option value="default">Select User Type..</option>
-                                    <option th:each="operator : ${responseObject}" th:value="${operator.id}"
-                                            th:text="${operator.phoneNumber}"></option>
-                                </select>
-                            </div>
-                        </div>
 
                     </fieldset>
 

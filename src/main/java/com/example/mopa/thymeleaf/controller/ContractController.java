@@ -2,8 +2,6 @@ package com.example.mopa.thymeleaf.controller;
 
 import com.example.mopa.thymeleaf.dto.request.ContractRequestDTO;
 import com.example.mopa.thymeleaf.dto.request.ContractUpdateDTO;
-import com.example.mopa.thymeleaf.dto.request.OrgRequestDTO;
-import com.example.mopa.thymeleaf.dto.request.OrgUpdateDTO;
 import com.example.mopa.thymeleaf.dto.response.ContractResponseDTO;
 import com.example.mopa.thymeleaf.dto.response.OrgResponseDTO;
 import com.example.mopa.thymeleaf.services.ContractService;
@@ -20,8 +18,8 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/contract-view")
-public class ContractViewController {
+@RequestMapping("/contract")
+public class ContractController {
 
     private final ContractService contractService;
     private final OrgService orgService;
@@ -29,7 +27,7 @@ public class ContractViewController {
     @GetMapping
     public ModelAndView showTelephoneView() {
         List<ContractResponseDTO> responseDTOList = contractService.getAllContractList();
-        return new ModelAndView("contract-view").addObject("addContract", responseDTOList);
+        return new ModelAndView("view-contract").addObject("addContract", responseDTOList);
     }
 
     @GetMapping("/add")
@@ -53,7 +51,7 @@ public class ContractViewController {
 
         contractService.createContract(requestDTO);
         attributes.addFlashAttribute("message", "Create Org.. successfully!");
-        return "redirect:/contract-view";
+        return "redirect:/view-contract";
     }
 
     @GetMapping("/{id}")
@@ -79,13 +77,13 @@ public class ContractViewController {
 
         contractService.updateOrganizationById(id, contractUpdateDTO);
         attributes.addFlashAttribute("message", "Contract Information updated successfully!");
-        return "redirect:/contract-view";
+        return "redirect:/view-contract";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable String id, RedirectAttributes attributes) {
         contractService.deleteById(id);
         attributes.addFlashAttribute("message", "Contract Information deleted successfully!");
-        return "redirect:/contract-view";
+        return "redirect:/view-contract";
     }
 }

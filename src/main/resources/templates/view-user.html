@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Add New User</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script
@@ -19,22 +19,22 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 class="text-center mb-4">Organization List</h1>
+    <h1 class="text-center mb-4">Register User List</h1>
 
     <th:block th:include="fragment/success-message.html"></th:block>
 
 
-    <a th:href="@{/organization-view/add}" class="btn btn-outline-success mb-3">
-        <i class="fas fa-fw fa-user-plus"></i> Create New Organization
+    <a th:href="@{/create-user/sign-up}" class="btn btn-outline-success mb-3">
+        <i class="fas fa-fw fa-user-plus"></i> Create New Users
     </a>
     <div class="table-responsive">
         <table id="example" class="table table-sm table-bordered">
             <thead>
             <tr class="text-center">
-                <th>Org Type</th>
-                <th>Org Name</th>
-                <th>Org Location</th>
-                <th>Address</th>
+                <th>User Name</th>
+                <th>User Email</th>
+                <th>User Phone</th>
+                <th>User Role</th>
                 <th>Created at</th>
                 <th>Update at</th>
                 <th>Actions</th>
@@ -45,31 +45,26 @@
                 <td class="text-center fw-bold" colspan="10">No records found</td>
             </tr>
             <tr class="text-center" th:each="responeDto: ${responseDTOS}">
-                <td th:text="${responeDto.OrgType}">Name</td>
-                <td th:text="${responeDto.orgName}">Email</td>
-                <td th:text="${responeDto.orgLocation}">Age</td>
-                <td th:text="${responeDto.orgAddress}">Street</td>
+                <td th:text="${responeDto.username}">User Name</td>
+                <td th:text="${responeDto.email}">User Email</td>
+                <td th:text="${responeDto.phoneNumber}">User Phone</td>
+                <td th:text="${responeDto.roles}">User Role</td>
                 <td th:text="${#temporals.format(responeDto.createdAt, 'dd/MM/yyyy HH:mm:ss')}">CreatedAt</td>
                 <td th:text="${#temporals.format(responeDto.updatedAt, 'dd/MM/yyyy HH:mm:ss')}">UpdateAt</td>
                 <td>
                     <div class="btn-group">
 
                         <button type="button" class="btn btn-sm btn-outline-primary">
-                            <a th:href="@{/organization-view/{id}(id=${responeDto.id})}"
+                            <a th:href="@{/create-user/{id}(id=${responeDto.id})}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fas fa-fw fa-pencil-alt"></i>
                             </a>
                         </button>
 
-                        <!-- <button type="button" class="btn btn-sm btn-outline-danger">
-                             <a th:href="@{/organization-view/delete/{id}(id=${responeDto.id})}" class="btn btn-sm btn-outline-primary">
-                                 <i class="fas fa-fw fa-trash-alt"></i>
-                             </a>
-                         </button>-->
 
                         <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
                                 data-bs-target="#deleteConfirmModal">
-                            <a th:href="@{/organization-view/delete/{id}(id=${responeDto.id})}"
+                            <a th:href="@{/create-user/delete/{id}(id=${responeDto.id})}"
                                class="btn btn-sm btn-outline-danger">
                                 <i class="fas fa-fw fa-trash-alt"></i>
                             </a>
@@ -99,7 +94,7 @@
         $(document).ready(function () {
             //Only needed for the filename of export files.
             //Normally set in the title tag of your page.
-            document.title = "Organization List";
+            document.title = "User";
             // Create search inputs in footer
             $("#example tfoot th").each(function () {
                 var title = $(this).text();
@@ -115,7 +110,7 @@
                         text: 'Print <i class="fa fa-lg fa-print"></i>',
                         extend: 'print',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
                         },
                         className: 'table-btns print-btn'
                     },
@@ -123,7 +118,7 @@
                         text: 'Export to Excel <i class="fa fa-lg fa-file-excel-o"></i>',
                         extend: 'excel',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
                         },
                         className: 'table-btns excel-btn'
                     },

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Add New Contact</title>
+    <title>Emergency Contract List</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script
@@ -19,49 +19,38 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 class="text-center mb-4">Contract List</h1>
+    <h1 class="text-center mb-4">Emergency Contact List</h1>
 
     <th:block th:include="fragment/success-message.html"></th:block>
 
-
-    <a th:href="@{/contract-view/add}" class="btn btn-outline-success mb-3">
-        <i class="fas fa-fw fa-user-plus"></i> Create New Contract
+    <a th:href="@{/emergency-contract/add}" class="btn btn-outline-success mb-3">
+        <i class="fas fa-fw fa-user-plus"></i> Create New Emergency Contract
     </a>
     <div class="table-responsive">
         <table id="example" class="table table-sm table-bordered">
             <thead>
             <tr class="text-center">
-                <th>Name</th>
-                <th>Govt.Id</th>
-                <th>Designation</th>
-                <th>Organization</th>
-                <th>Contact No</th>
-                <th>Email</th>
-                <th>Ordering</th>
+                <th>Institution Type</th>
+                <th>Telephone</th>
                 <th>Created at</th>
                 <th>Update at</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:if="${#lists.isEmpty(addContract)}">
+            <tr th:if="${#lists.isEmpty(emergencyContract)}">
                 <td class="text-center fw-bold" colspan="10">No records found</td>
             </tr>
-            <tr class="text-center" th:each="responeDto: ${addContract}">
-                <td th:text="${responeDto.name}">govId</td>
-                <td th:text="${responeDto.govId}">name</td>
-                <td th:text="${responeDto.designation}">designation</td>
-                <td th:text="${responeDto.organization.orgName}">organization</td>
-                <td th:text="${responeDto.mobileNumber}">mobileNumber</td>
-                <td th:text="${responeDto.email}">email</td>
-                <td th:text="${responeDto.orderSl}">orderSl</td>
+            <tr class="text-center" th:each="responeDto: ${emergencyContract}">
+                <td th:text="${responeDto.institutionType}">Name</td>
+                <td th:text="${responeDto.telephoneNUmber}">Email</td>
                 <td th:text="${#temporals.format(responeDto.createdAt, 'dd/MM/yyyy HH:mm:ss')}">CreatedAt</td>
                 <td th:text="${#temporals.format(responeDto.updatedAt, 'dd/MM/yyyy HH:mm:ss')}">UpdateAt</td>
                 <td>
                     <div class="btn-group">
 
                         <button type="button" class="btn btn-sm btn-outline-primary">
-                            <a th:href="@{/contract-view/{id}(id=${responeDto.id})}"
+                            <a th:href="@{/emergency-contract/{id}(id=${responeDto.id})}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fas fa-fw fa-pencil-alt"></i>
                             </a>
@@ -70,7 +59,7 @@
 
                         <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
                                 data-bs-target="#deleteConfirmModal">
-                            <a th:href="@{/contract-view/delete/{id}(id=${responeDto.id})}"
+                            <a th:href="@{/emergency-contract/delete/{id}(id=${responeDto.id})}"
                                class="btn btn-sm btn-outline-danger">
                                 <i class="fas fa-fw fa-trash-alt"></i>
                             </a>
@@ -100,7 +89,7 @@
         $(document).ready(function () {
             //Only needed for the filename of export files.
             //Normally set in the title tag of your page.
-            document.title = "Contact List";
+            document.title = "Emergency Contact";
             // Create search inputs in footer
             $("#example tfoot th").each(function () {
                 var title = $(this).text();
@@ -116,7 +105,7 @@
                         text: 'Print <i class="fa fa-lg fa-print"></i>',
                         extend: 'print',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                            columns: [0, 1, 2, 3]
                         },
                         className: 'table-btns print-btn'
                     },
@@ -124,7 +113,7 @@
                         text: 'Export to Excel <i class="fa fa-lg fa-file-excel-o"></i>',
                         extend: 'excel',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                            columns: [0, 1, 2, 3]
                         },
                         className: 'table-btns excel-btn'
                     },

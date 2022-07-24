@@ -16,15 +16,15 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/organization-view")
-public class OrganizationViewController {
+@RequestMapping("/organization")
+public class OrganizationController {
 
     private final OrgService orgService;
 
     @GetMapping
     public ModelAndView showTelephoneView() {
         List<OrgResponseDTO> responseDTOS = orgService.getAllOrgList();
-        return new ModelAndView("organization-view").addObject("responseDTOS", responseDTOS);
+        return new ModelAndView("view-organization").addObject("responseDTOS", responseDTOS);
     }
 
     @GetMapping("/add")
@@ -40,7 +40,7 @@ public class OrganizationViewController {
 
         orgService.createOrg(requestDTO);
         attributes.addFlashAttribute("message", "Create Org.. successfully!");
-        return "redirect:/organization-view";
+        return "redirect:/view-organization";
     }
 
     @GetMapping("/{id}")
@@ -57,14 +57,14 @@ public class OrganizationViewController {
 
         orgService.updateOrganizationById(id, orgUpdateDTO);
         attributes.addFlashAttribute("message", "Org.. updated successfully!");
-        return "redirect:/organization-view";
+        return "redirect:/view-organization";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable String id, RedirectAttributes attributes) {
         orgService.deleteById(id);
         attributes.addFlashAttribute("message", "Org.. deleted successfully!");
-        return "redirect:/organization-view";
+        return "redirect:/view-organization";
     }
 
 }

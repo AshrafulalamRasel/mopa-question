@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role,String> {
-    List<Role> findAllByOrderByRoleCodeDesc();
+    List<Role> findAllByOrderByIdDesc();
 }

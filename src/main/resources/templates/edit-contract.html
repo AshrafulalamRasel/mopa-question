@@ -25,7 +25,7 @@
     <div class="container mt-3">
         <div class="card">
             <div class="card-body">
-                <form method="POST" th:action="@{/contract-view/{id}(id=${responseDTO.id})}" class="mx-auto w-50" th:object="${responseDTO}">
+                <form method="POST" th:action="@{/contract/{id}(id=${responseDTO.id})}" class="mx-auto w-50" th:object="${responseDTO}">
                     <th:block th:include="fragment/error-message.html"></th:block>
                     <fieldset>
 
@@ -121,7 +121,7 @@
 
                     <div class="row">
                         <div class="col-sm-6">
-                            <a th:href="@{/contract-view}" class="btn btn-outline-secondary w-100">
+                            <a th:href="@{/contract}" class="btn btn-outline-secondary w-100">
                                 Back
                             </a>
                         </div>

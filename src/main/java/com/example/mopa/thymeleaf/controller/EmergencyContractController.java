@@ -16,15 +16,15 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/emergency-contract-view")
-public class EmergencyContractViewController {
+@RequestMapping("/emergency-contract")
+public class EmergencyContractController {
 
     private final EmergencyContractService emergencyContractService;
 
     @GetMapping
     public ModelAndView showTelephoneView() {
         List<EmergencyContractResponseDTO> emergencyContractList = emergencyContractService.getAllEmergencyContractList();
-        return new ModelAndView("emergency-contract-view").addObject("emergencyContract", emergencyContractList);
+        return new ModelAndView("view-emergency-contract").addObject("emergencyContract", emergencyContractList);
     }
 
     @GetMapping("/add")
@@ -40,7 +40,7 @@ public class EmergencyContractViewController {
 
         emergencyContractService.createEmergencyContract(emergencyContractRequestDTO);
         attributes.addFlashAttribute("message", "Create Emergency Contract successfully!");
-        return "redirect:/emergency-contract-view";
+        return "redirect:/view-emergency-contract";
     }
 
     @GetMapping("/{id}")
@@ -57,13 +57,13 @@ public class EmergencyContractViewController {
 
         emergencyContractService.updateEmergencyContractById(id, orgUpdateDTO);
         attributes.addFlashAttribute("message", "Emergency Contract updated successfully!");
-        return "redirect:/emergency-contract-view";
+        return "redirect:/view-emergency-contract";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable String id, RedirectAttributes attributes) {
         emergencyContractService.deleteById(id);
         attributes.addFlashAttribute("message", "Emergency Contract deleted successfully!");
-        return "redirect:/emergency-contract-view";
+        return "redirect:/view-emergency-contract";
     }
 }

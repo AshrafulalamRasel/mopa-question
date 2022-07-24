@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<head xmlns:layout="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/basic}">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -14,50 +16,51 @@
     <link href="https://harvesthq.github.io/chosen/chosen.css" rel="stylesheet"/>
 
 </head>
+
 <body>
 <div layout:fragment="content">
     <div class="text-center">
-
+        <samp class="text-center m-lg-2">Edit Role</samp>
     </div>
+
     <div class="container mt-3">
-        <div class="card" style="width: 40rem;">
-            <samp class="text-center m-lg-2">Registration</samp>
+        <div class="card">
             <div class="card-body">
-                <form method="POST" th:action="@{/login-registration/add}" class="mx-auto w-50" th:object="${registration}">
+                <form method="POST" th:action="@{/role/{id}(id=${responseDTO.id})}" class="mx-auto w-50"
+                      th:object="${responseDTO}">
+                    <th:block th:include="fragment/error-message.html"></th:block>
+                    <fieldset>
 
-                <!-- Email input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="form2Example1">Email address</label>
-                        <input type="text" class="form-control" placeholder="Enter the Email..." th:field="*{email}" th:classappend="${#fields.hasErrors('email')}? 'is-invalid'">
+                        <div class="row">
+                            <div class="col-sm-6 mb-3">
+                                <label>Role Name</label>
+                                <input type="text" class="form-control" placeholder="Enter the Intercom Office..."
+                                       th:field="*{name}"
+                                       th:classappend="${#fields.hasErrors('name')}? 'is-invalid'">
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <a th:href="@{/contract-view}" class="btn btn-outline-secondary w-100">
+                                Back
+                            </a>
+                        </div>
+                        <div class="col-sm-6">
+                            <button type="submit" class="btn btn-outline-success w-100">
+                                Update
+                            </button>
+                        </div>
                     </div>
-
-                    <!-- Phone input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="form2Example1">Phone  Number</label>
-                        <input type="text" class="form-control" placeholder="Enter the Phone Number..." th:field="*{phoneNumber}" th:classappend="${#fields.hasErrors('phoneNumber')}? 'is-invalid'">
-                    </div>
-                    <!-- Password input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="form2Example2">Password</label>
-                        <input type="password" class="form-control" placeholder="Enter the Password..." th:field="*{password}" th:classappend="${#fields.hasErrors('password')}? 'is-invalid'">
-                    </div>
-
-                    <div class="text-lg-end">
-                        <!-- Submit button -->
-                        <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
-
-                    </div>
-
-                    <div class="text-lg-start">
-                        <!-- Submit button -->
-                        <p><a th:href="@{/login-registration}">Back</a></p>
-                    </div>
-
                 </form>
+
             </div>
         </div>
     </div>
-
 </div>
 
 <th:block layout:fragment="scripts">
@@ -68,13 +71,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
             crossorigin="anonymous"></script>
-    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    &lt;!&ndash;<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>&ndash;&gt;
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.2/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
 
     <script src="https://harvesthq.github.io/chosen/docsupport/jquery-3.2.1.min.js"></script>
     <script src="https://harvesthq.github.io/chosen/chosen.jquery.js"></script>
 
+
+    <script type="text/javascript">
+        $(function () {
+            $('select').chosen();
+        });
+    </script>
 </th:block>
 </body>
 </html>
