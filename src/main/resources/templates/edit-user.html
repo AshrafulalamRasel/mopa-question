@@ -16,50 +16,77 @@
     <link href="https://harvesthq.github.io/chosen/chosen.css" rel="stylesheet"/>
 
 </head>
+
 <body>
 <div layout:fragment="content">
     <div class="text-center">
-        <samp class="text-center m-lg-2">Adding Emergency Contract Information</samp>
+        <samp class="text-center m-lg-2">Edit User</samp>
     </div>
+
     <div class="container mt-3">
         <div class="card">
             <div class="card-body">
-                <form method="POST" th:action="@{/emergency-contract/add}" class="mx-auto w-50" th:object="${emergencyContract}">
+                <form method="POST" th:action="@{/create-user/{id}(id=${responseDTO.id})}" class="mx-auto w-50"
+                      th:object="${responseDTO}">
                     <th:block th:include="fragment/error-message.html"></th:block>
                     <fieldset>
 
                         <div class="row">
-                            <div class="col-sm-12 mb-3">
-                                <label>Institution Type:</label>
-                                <input type="text" class="form-control" placeholder="Enter the Org Name..." th:field="*{institutionType}"
-                                       th:classappend="${#fields.hasErrors('institutionType')}? 'is-invalid'">
+                            <div class="col-sm-6 mb-3">
+                                <label>User Name:</label>
+                                <input type="text" class="form-control" placeholder="Enter the User name..."
+                                       th:field="*{username}"
+                                       th:classappend="${#fields.hasErrors('username')}? 'is-invalid'">
                             </div>
-                            <div class="col-sm-12 mb-3">
-                                <label>Telephone NUmber:</label>
-                                <input type="text" class="form-control" placeholder="Enter the Org Name..." th:field="*{telephoneNUmber}"
-                                       th:classappend="${#fields.hasErrors('telephoneNUmber')}? 'is-invalid'">
+
+                            <div class="col-sm-6 mb-3">
+                                <label>Email Address:</label>
+                                <input type="text" class="form-control" placeholder="Enter the Email..."
+                                       th:field="*{email}" th:classappend="${#fields.hasErrors('email')}? 'is-invalid'">
                             </div>
+
                         </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 mb-3">
+                                <label>Phone Number:</label>
+                                <input type="text" class="form-control" placeholder="Enter the Phone Number..."
+                                       th:field="*{phoneNumber}"
+                                       th:classappend="${#fields.hasErrors('phoneNumber')}? 'is-invalid'">
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <label>Role:</label>
+                                <select class="form-control" th:field="*{roles}"
+                                        th:classappend="${#fields.hasErrors('roles')}? 'is-invalid'">
+                                    <option value="default">Select Role Name..</option>
+                                    <option th:each="operator : ${roleRequestDTOList}" th:value="${operator.id}"
+                                            th:text="${operator.name}"></option>
+                                </select>
+                            </div>
+
+                        </div>
+
 
                     </fieldset>
 
+
                     <div class="row">
                         <div class="col-sm-6">
-                            <a th:href="@{/emergency-contract}" class="btn btn-outline-secondary w-100">
+                            <a th:href="@{/create-user}" class="btn btn-outline-secondary w-100">
                                 Back
                             </a>
                         </div>
                         <div class="col-sm-6">
                             <button type="submit" class="btn btn-outline-success w-100">
-                                Save
+                                Update
                             </button>
                         </div>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
-
 </div>
 
 <th:block layout:fragment="scripts">

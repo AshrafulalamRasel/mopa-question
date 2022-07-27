@@ -39,8 +39,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
+		http.authorizeRequests().antMatchers("/").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN","VIEW")
 				.antMatchers("/new").hasAnyAuthority("ADMIN", "CREATOR").antMatchers("/edit/**")
+				.hasAnyAuthority("ADMIN", "VIEW").antMatchers("/view/**")
 				.hasAnyAuthority("ADMIN", "EDITOR").antMatchers("/delete/**").hasAuthority("ADMIN")
 				.antMatchers("/h2-console/**").permitAll().anyRequest().authenticated().and().formLogin().permitAll()
 				.and().logout().permitAll().and().exceptionHandling().accessDeniedPage("/403");

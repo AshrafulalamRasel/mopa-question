@@ -20,6 +20,11 @@ public class RoleService {
 
     public RoleRequest createRole(RoleRequest roleRequest) {
 
+        boolean existsByName = roleRepository.existsByName(roleRequest.getName());
+        if (existsByName){
+            throw new RuntimeException("Already Found Found");
+        }
+
         Role entity = new Role();
         entity.setName(roleRequest.getName());
         roleRepository.saveAndFlush(entity);

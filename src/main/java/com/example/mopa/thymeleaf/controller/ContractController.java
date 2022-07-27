@@ -51,7 +51,7 @@ public class ContractController {
 
         contractService.createContract(requestDTO);
         attributes.addFlashAttribute("message", "Create Org.. successfully!");
-        return "redirect:/view-contract";
+        return "redirect:/contract";
     }
 
     @GetMapping("/{id}")
@@ -77,13 +77,13 @@ public class ContractController {
 
         contractService.updateOrganizationById(id, contractUpdateDTO);
         attributes.addFlashAttribute("message", "Contract Information updated successfully!");
-        return "redirect:/view-contract";
+        return "redirect:/contract";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable String id, RedirectAttributes attributes) {
         contractService.deleteById(id);
         attributes.addFlashAttribute("message", "Contract Information deleted successfully!");
-        return "redirect:/view-contract";
+        return "redirect:/contract";
     }
 }

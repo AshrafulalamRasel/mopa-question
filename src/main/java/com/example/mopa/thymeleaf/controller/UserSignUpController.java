@@ -1,5 +1,6 @@
 package com.example.mopa.thymeleaf.controller;
 
+import com.example.mopa.thymeleaf.dto.request.RoleRequest;
 import com.example.mopa.thymeleaf.dto.request.UserEntityRequestDTO;
 import com.example.mopa.thymeleaf.dto.response.RoleResponse;
 import com.example.mopa.thymeleaf.dto.response.UserEntityResponseDTO;
@@ -10,10 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -26,9 +24,7 @@ import java.util.List;
 public class UserSignUpController {
 
     private final UserService userService;
-    private final UserRepository orgRepository;
     private final RoleService roleService;
-    private final JdbcTemplate jdbcTemplate;
 
     @GetMapping
     public ModelAndView showTelephoneView() {
@@ -58,5 +54,30 @@ public class UserSignUpController {
         attributes.addFlashAttribute("message", "Registration successfully!");
         return "redirect:/create-user";
     }
+
+    @GetMapping("/{id}")
+    public ModelAndView showUpdateForm(@PathVariable String id) {
+        ModelAndView modelAndView = new ModelAndView();
+        UserEntityResponseDTO responseDTO = userService.getAllUserByBuserId(id);
+        List<RoleResponse> responseDTOList = roleService.getAllRoleListList();
+
+        modelAndView.addObject("roleRequestDTOList", responseDTOList);
+        modelAndView.addObject("responseDTO", responseDTO);
+        modelAndView.setViewName("edit-user");
+
+        return modelAndView;
+    }
+
+    @PostMapping("/{id}")
+    public String updateUser(@PathVariable String id, @ModelAttribute("responseDTO") @Valid UserEntityRequestDTO requestDTO, BindingResult result, RedirectAttributes attributes) {
+        if (result.hasErrors()) {
+            return "edit-user";
+        }
+
+        userService.updateUserByUserId(id, requestDTO);
+        attributes.addFlashAttribute("message", "Role updated successfully!");
+        return "redirect:/create-user";
+    }
+
 
 }

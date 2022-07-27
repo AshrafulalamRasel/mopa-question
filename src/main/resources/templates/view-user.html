@@ -48,27 +48,29 @@
                 <td th:text="${responeDto.username}">User Name</td>
                 <td th:text="${responeDto.email}">User Email</td>
                 <td th:text="${responeDto.phoneNumber}">User Phone</td>
-                <td th:text="${responeDto.roles}">User Role</td>
+                <!--<td th:text="${responeDto.roles}">User Role</td>-->
+                <td th:each="object: ${responeDto.roles}"><span th:text="${object.name}" /></td>
                 <td th:text="${#temporals.format(responeDto.createdAt, 'dd/MM/yyyy HH:mm:ss')}">CreatedAt</td>
                 <td th:text="${#temporals.format(responeDto.updatedAt, 'dd/MM/yyyy HH:mm:ss')}">UpdateAt</td>
                 <td>
                     <div class="btn-group">
+                        <div sec:authorize="hasAnyAuthority('ADMIN','EDITOR')">
+                            <button type="button" class="btn btn-sm btn-outline-primary">
+                                <a th:href="@{/create-user/{id}(id=${responeDto.id})}"
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-fw fa-pencil-alt"></i>
+                                </a>
+                            </button>
+                        </div>
 
-                        <button type="button" class="btn btn-sm btn-outline-primary">
-                            <a th:href="@{/create-user/{id}(id=${responeDto.id})}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fas fa-fw fa-pencil-alt"></i>
-                            </a>
-                        </button>
-
-
+                        <div sec:authorize="hasAnyAuthority('ADMIN')">
                         <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
                                 data-bs-target="#deleteConfirmModal">
                             <a th:href="@{/create-user/delete/{id}(id=${responeDto.id})}"
                                class="btn btn-sm btn-outline-danger">
                                 <i class="fas fa-fw fa-trash-alt"></i>
                             </a>
-                        </button>
+                        </button></div>
                     </div>
                 </td>
             </tr>

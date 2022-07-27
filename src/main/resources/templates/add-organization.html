@@ -24,7 +24,7 @@
     <div class="container mt-3">
         <div class="card">
             <div class="card-body">
-                <form method="POST" th:action="@{/organization-view/add}" class="mx-auto w-50" th:object="${addOrg}">
+                <form method="POST" th:action="@{/organization/add}" class="mx-auto w-50" th:object="${addOrg}">
                     <th:block th:include="fragment/error-message.html"></th:block>
                     <fieldset>
 
@@ -93,7 +93,7 @@
 
                     <div class="row">
                         <div class="col-sm-6">
-                            <a th:href="@{/organization-view}" class="btn btn-outline-secondary w-100">
+                            <a th:href="@{/organization}" class="btn btn-outline-secondary w-100">
                                 Back
                             </a>
                         </div>

@@ -54,7 +54,7 @@ public class RoleController {
 
         service.createRole(requestDTO);
         attributes.addFlashAttribute("message", "Create Role.. successfully!");
-        return "redirect:/view-role";
+        return "redirect:/role";
     }
 
     @GetMapping("/{id}")
@@ -77,7 +77,7 @@ public class RoleController {
 
         service.updateRoleById(id, roleRequest);
         attributes.addFlashAttribute("message", "Role updated successfully!");
-        return "redirect:/view-role";
+        return "redirect:/role";
     }
 
 
@@ -85,7 +85,7 @@ public class RoleController {
     public String delete(@PathVariable String id, RedirectAttributes attributes) {
         service.deleteById(id);
         attributes.addFlashAttribute("message", "Role Info deleted successfully!");
-        return "redirect:/view-role";
+        return "redirect:/role";
     }
 
 }
