@@ -1,0 +1,32 @@
+package com.example.mopa.thymeleaf.dto.response;
+
+import lombok.Data;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+@Data
+public class PersonalInfoResponseDTO {
+
+    private String id;
+
+    private String govId;
+
+    private String employeeName;
+
+    private String designation;
+
+    private String email;
+
+    private LocalDate dateOfBirth;
+
+    private LocalDate dateOfJoining;
+
+    private String mobileNumber;
+
+    private String mobileNumberResidence;
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
+}

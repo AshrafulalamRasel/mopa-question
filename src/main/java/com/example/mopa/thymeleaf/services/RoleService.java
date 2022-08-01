@@ -5,11 +5,11 @@ import com.example.mopa.thymeleaf.dto.request.RoleRequest;
 import com.example.mopa.thymeleaf.dto.response.RoleResponse;
 import com.example.mopa.thymeleaf.repository.RoleRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class RoleService {
 
     private final RoleRepository roleRepository;
+    private final NamedParameterJdbcTemplate coreDB; ;
 
     public RoleRequest createRole(RoleRequest roleRequest) {
 
@@ -33,6 +34,13 @@ public class RoleService {
     }
 
     public List<RoleResponse> getAllRoleListList() {
+/*
+        StringBuilder sql = new StringBuilder();
+        Map<String, Object> param = new HashMap<>();
+        sql.append(" SELECT * FROM role re WHERE re.name=:name ");
+        param.put("name","ADMIN");
+        List<Role> orderStatusList = coreDB.query(sql.toString(), param, new BeanPropertyRowMapper(Role.class));
+*/
 
         List<Role> roleList = roleRepository.findAllByOrderByIdDesc();
 
