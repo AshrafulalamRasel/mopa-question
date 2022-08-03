@@ -13,4 +13,6 @@ import java.util.Optional;
 @Repository
 public interface PersonalInfoRepository extends JpaRepository<PersonalInfoEntity,String> {
 
+    List<PersonalInfoEntity> findAllByLoggedUsers(String userName);
+
 }

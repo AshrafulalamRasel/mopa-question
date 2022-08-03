@@ -1,6 +1,7 @@
 package com.example.mopa.thymeleaf.dto.request;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -15,11 +16,15 @@ public class PersonalInfoRequestDTO {
 
     private String email;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate dateOfJoining;
 
     private String mobileNumber;
 
     private String mobileNumberResidence;
+
+    private String loggedUsers;
 }

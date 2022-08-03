@@ -22,6 +22,10 @@ public class PersonalInfoResponseDTO {
 
     private LocalDate dateOfJoining;
 
+    private String prlApplicable;
+
+    private LocalDate prlDate;
+
     private String mobileNumber;
 
     private String mobileNumberResidence;
@@ -29,4 +33,6 @@ public class PersonalInfoResponseDTO {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    private String loggedUsers;
 }

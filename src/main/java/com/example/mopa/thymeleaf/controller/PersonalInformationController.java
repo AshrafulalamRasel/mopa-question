@@ -1,10 +1,7 @@
 package com.example.mopa.thymeleaf.controller;
 
-import com.example.mopa.thymeleaf.dto.request.ContractRequestDTO;
-import com.example.mopa.thymeleaf.dto.request.ContractUpdateDTO;
-import com.example.mopa.thymeleaf.dto.response.ContractResponseDTO;
-import com.example.mopa.thymeleaf.dto.response.OrgResponseDTO;
-import com.example.mopa.thymeleaf.dto.response.PersonalInfoResponseDTO;
+import com.example.mopa.thymeleaf.dto.request.*;
+import com.example.mopa.thymeleaf.dto.response.*;
 import com.example.mopa.thymeleaf.services.ContractService;
 import com.example.mopa.thymeleaf.services.OrgService;
 import com.example.mopa.thymeleaf.services.PersonalInfoService;
@@ -30,5 +27,48 @@ public class PersonalInformationController {
         List<PersonalInfoResponseDTO> responseDTOList = service.getAllInformation();
         return new ModelAndView("view-personal-info").addObject("addPersonalInfo", responseDTOList);
     }
+
+    @GetMapping("/add")
+    public ModelAndView showCreateForm() {
+        return new ModelAndView("add-personal-info").addObject("addPersonalInfo", new PersonalInfoRequestDTO());
+    }
+
+    @PostMapping("/add")
+    public String create(@ModelAttribute("addPersonalInfo") @Valid PersonalInfoRequestDTO requestDTO, BindingResult result, RedirectAttributes attributes) {
+        if (result.hasErrors()) {
+            return "add-personal-info";
+        }
+
+        service.createPersonalInfo(requestDTO);
+        attributes.addFlashAttribute("message", "Create Personal Information.. successfully!");
+        return "redirect:/personal-info";
+    }
+
+    @GetMapping("/{id}")
+    public ModelAndView showUpdateForm(@PathVariable String id) {
+        ModelAndView modelAndView = new ModelAndView();
+        PersonalInfoResponseDTO responseDTO = service.getPersonalInfoBy(id);
+        modelAndView.addObject("responseDTO", responseDTO);
+        modelAndView.setViewName("edit-personal-info");
+        return modelAndView;
+    }
+
+    @PostMapping("/{id}")
+    public String updatePersonalInfoBy(@PathVariable String id, @ModelAttribute("responseDTO") @Valid PersonalInfoRequestDTO requestDTO, BindingResult result, RedirectAttributes attributes) {
+        if (result.hasErrors()) {
+            return "edit-personal-info";
+        }
+
+        service.updatePersonalInfoBy(id, requestDTO);
+        attributes.addFlashAttribute("message", "Personal Information updated successfully!");
+        return "redirect:/personal-info";
+    }
+
+    @GetMapping("/view-prl")
+    public ModelAndView showPRLForm() {
+        List<PersonalInfoResponseDTO> responseDTOList = service.getAllPRLInformation();
+        return new ModelAndView("view-prl-info").addObject("addPersonalInfo", responseDTOList);
+    }
+
 
 }

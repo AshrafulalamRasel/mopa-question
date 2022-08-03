@@ -15,7 +15,7 @@
         <div class="container-fluid py-3">
             <div class="row align-items-md-stretch">
                 <div class="col-md-4">
-                    <div class="h-10 p-5 bg-light rounded-3">
+                    <div class="h-10 p-5 bg-light rounded-3" sec:authorize="hasAnyAuthority('ADMIN','USER')">
                         <a th:href="@{/personal-info}" class="nav-link text-dark  text-center">
                             <i class="fa fa-sitemap d-block fa-lg mx-auto mb-2" aria-hidden="true"></i>
                             Create Personal Information
@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div class="h-10 p-5 bg-light rounded-3">
+                    <div class="h-10 p-5 bg-light rounded-3" sec:authorize="hasAnyAuthority('ADMIN')">
                         <a th:href="@{/organization}" class="nav-link text-dark  text-center">
                             <i class="fa fa-sitemap d-block fa-lg mx-auto mb-2" aria-hidden="true"></i>
                             Organization View
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="h-10 p-5 bg-light rounded-3">
+                    <div class="h-10 p-5 bg-light rounded-3" sec:authorize="hasAnyAuthority('ADMIN')">
                         <a th:href="@{/emergency-contract}" class="nav-link text-dark  text-center">
                             <i class="fa fa-bullhorn d-block fa-lg mx-auto mb-2" aria-hidden="true"></i>
                             Emergency Contact

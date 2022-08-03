@@ -1,6 +1,7 @@
 package com.example.mopa.thymeleaf.domain;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -19,13 +20,17 @@ public class PersonalInfoEntity extends BaseEntity {
 
     private String email;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate dateOfJoining;
 
     private String mobileNumber;
 
     private String mobileNumberResidence;
+
+    private String loggedUsers;
 
 
 }

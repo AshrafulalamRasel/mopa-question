@@ -23,24 +23,29 @@
 
     <th:block th:include="fragment/success-message.html"></th:block>
 
-
-    <a th:href="@{/contract/add}" class="btn btn-outline-success mb-3">
-        <i class="fas fa-fw fa-user-plus"></i> Create New Contract
+    <a th:href="@{/personal-info/add}" class="btn btn-outline-success mb-3"
+       sec:authorize="hasAnyAuthority('ADMIN','CREATOR','EDITOR','USER')">
+        <i class="fas fa-fw fa-user-plus"></i> Create New Personal Information
     </a>
+
+    <a th:href="@{/personal-info/view-prl}" class="btn btn-outline-success mb-3"
+       sec:authorize="hasAnyAuthority('ADMIN')">
+        <i class="fas fa-fw fa-user-plus"></i> View Only PRL Document
+    </a>
+
     <div class="table-responsive">
         <table id="example" class="table table-sm table-bordered">
             <thead>
             <tr class="text-center">
                 <th>Govt.Id</th>
-                <th>Employee Name</th>
-                <th>Designation</th>
-                <th>Email</th>
+                <th>Employee Full Name<br>Email<br>Designation</th>
                 <th>Date Of Birth</th>
                 <th>Date Of Join</th>
                 <th>Mobile No</th>
-                <th>Mobile No (Residence)</th>
+                <th>PRL Applicable</th>
+                <th>PRL Date</th>
+                <th>Creator</th>
                 <th>Created at</th>
-                <th>Update at</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -49,34 +54,33 @@
                 <td class="text-center fw-bold" colspan="10">No records found</td>
             </tr>
             <tr class="text-center" th:each="responeDto: ${addPersonalInfo}">
-                <td th:text="${responeDto.govId}">govId</td>
-                <td th:text="${responeDto.employeeName}">name</td>
-                <td th:text="${responeDto.designation}">designation</td>
-                <td th:text="${responeDto.email}">email</td>
-                <td th:text="${#temporals.format(responeDto.dateOfBirth, 'dd/MM/yyyy HH:mm:ss')}">dateOfBirth</td>
-                <td th:text="${#temporals.format(responeDto.dateOfJoining, 'dd/MM/yyyy HH:mm:ss')}">dateOfJoining</td>
+                <td th:text="${responeDto.govId}">${responeDto.govId}</td>
+                <td th:utext="${responeDto.employeeName} + ('<br>'+${(responeDto.email)}) + ('<br>'+${(responeDto.designation)})"></td>
+                <td th:text="${#temporals.format(responeDto.dateOfBirth, 'dd/MM/yyyy')}">dateOfBirth</td>
+                <td th:text="${#temporals.format(responeDto.dateOfJoining, 'dd/MM/yyyy')}">dateOfJoining</td>
                 <td th:text="${responeDto.mobileNumber}">mobileNumber</td>
-                <td th:text="${responeDto.mobileNumberResidence}">mobileNumberResidence</td>
+                <td th:text="${responeDto.prlApplicable}">prlApplicable</td>
+                <td th:text="${#temporals.format(responeDto.prlDate, 'dd/MM/yyyy')}">prlDate</td>
+                <td th:text="${responeDto.loggedUsers}">loggedUsers</td>
                 <td th:text="${#temporals.format(responeDto.createdAt, 'dd/MM/yyyy HH:mm:ss')}">CreatedAt</td>
-                <td th:text="${#temporals.format(responeDto.updatedAt, 'dd/MM/yyyy HH:mm:ss')}">UpdateAt</td>
                 <td>
                     <div class="btn-group">
 
-                        <button type="button" class="btn btn-sm btn-outline-primary">
-                            <a th:href="@{/contract/{id}(id=${responeDto.id})}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fas fa-fw fa-pencil-alt"></i>
-                            </a>
-                        </button>
+                        <div sec:authorize="hasAnyAuthority('ADMIN','USER')">
+                            <button type="button" class="btn btn-sm btn-outline-primary">
+                                <a th:href="@{/personal-info/{id}(id=${responeDto.id})}"
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-fw fa-pencil-alt"></i>
+                                </a>
+                            </button>
+                        </div>
 
 
-                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
-                                data-bs-target="#deleteConfirmModal">
-                            <a th:href="@{/contract/delete/{id}(id=${responeDto.id})}"
-                               class="btn btn-sm btn-outline-danger">
-                                <i class="fas fa-fw fa-trash-alt"></i>
-                            </a>
-                        </button>
+                        <a th:href="@{/personal-info/delete/{id}(id=${responeDto.id})}"
+                           sec:authorize="hasAnyAuthority('ADMIN')"
+                           class="btn btn-sm btn-outline-danger">
+                            <i class="fas fa-fw fa-trash-alt"></i>
+                        </a>
                     </div>
                 </td>
             </tr>
@@ -102,7 +106,7 @@
         $(document).ready(function () {
             //Only needed for the filename of export files.
             //Normally set in the title tag of your page.
-            document.title = "Contact";
+            document.title = "Personal Information";
             // Create search inputs in footer
             $("#example tfoot th").each(function () {
                 var title = $(this).text();

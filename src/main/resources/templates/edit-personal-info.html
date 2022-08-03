@@ -19,12 +19,13 @@
 <body>
 <div layout:fragment="content">
     <div class="text-center">
-        <samp class="text-center m-lg-2">Adding New Personal Information</samp>
+        <samp class="text-center m-lg-2">Edit New Personal Information</samp>
     </div>
     <div class="container mt-3">
         <div class="card">
             <div class="card-body">
-                <form method="POST" th:action="@{/personal-info/add}" class="mx-auto w-50" th:object="${addPersonalInfo}">
+                    <form method="POST" th:action="@{/personal-info/{id}(id=${responseDTO.id})}" class="mx-auto w-50"
+                          th:object="${responseDTO}">
                     <th:block th:include="fragment/error-message.html"></th:block>
                     <fieldset>
 
@@ -83,7 +84,7 @@
                         </div>
                         <div class="col-sm-6">
                             <button type="submit" class="btn btn-outline-success w-100">
-                                Save
+                                Update
                             </button>
                         </div>
                     </div>
