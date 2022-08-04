@@ -24,52 +24,67 @@
     <div class="container mt-3">
         <div class="card">
             <div class="card-body">
-                    <form method="POST" th:action="@{/personal-info/{id}(id=${responseDTO.id})}" class="mx-auto w-50"
-                          th:object="${responseDTO}">
+                <form method="POST" th:action="@{/personal-info/{id}(id=${responseDTO.id})}" class="mx-auto w-50"
+                      th:object="${responseDTO}">
                     <th:block th:include="fragment/error-message.html"></th:block>
                     <fieldset>
 
                         <div class="row">
                             <div class="col-sm-6 mb-3">
                                 <label>Gov.Id:</label>
-                                <input type="text" class="form-control" placeholder="Enter the gov.Id ..." th:field="*{govId}" th:classappend="${#fields.hasErrors('govId')}? 'is-invalid'">
+                                <input type="text" class="form-control" placeholder="Enter the gov.Id ..."
+                                       th:field="*{govId}" th:classappend="${#fields.hasErrors('govId')}? 'is-invalid'">
                             </div>
                             <div class="col-sm-6 mb-3">
                                 <label>Employee Full Name:</label>
-                                <input type="text" class="form-control" placeholder="Enter the Employee Name ..." th:field="*{employeeName}" th:classappend="${#fields.hasErrors('employeeName')}? 'is-invalid'">
+                                <input type="text" class="form-control" placeholder="Enter the Employee Name ..."
+                                       th:field="*{employeeName}"
+                                       th:classappend="${#fields.hasErrors('employeeName')}? 'is-invalid'">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-6 mb-3">
                                 <label>Designation:</label>
-                                <input type="text" class="form-control" placeholder="Enter the Designation ..." th:field="*{designation}" th:classappend="${#fields.hasErrors('designation')}? 'is-invalid'">
+                                <input type="text" class="form-control" placeholder="Enter the Designation ..."
+                                       th:field="*{designation}"
+                                       th:classappend="${#fields.hasErrors('designation')}? 'is-invalid'">
                             </div>
                             <div class="col-sm-6 mb-3">
                                 <label>Email:</label>
-                                <input type="text" class="form-control" placeholder="Enter the Email ..." th:field="*{email}" th:classappend="${#fields.hasErrors('email')}? 'is-invalid'">
+                                <input type="text" class="form-control" placeholder="Enter the Email ..."
+                                       th:field="*{email}" th:classappend="${#fields.hasErrors('email')}? 'is-invalid'">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-6 mb-3">
                                 <label>DateOfBirth:</label>
-                                <input type="date" class="form-control" placeholder="Enter the DateOfBirth ..." th:field="*{dateOfBirth}" th:classappend="${#fields.hasErrors('dateOfBirth')}? 'is-invalid'">
+                                <input type="date" class="form-control" placeholder="Enter the DateOfBirth ..."
+                                       th:field="*{dateOfBirth}"
+                                       th:classappend="${#fields.hasErrors('dateOfBirth')}? 'is-invalid'">
                             </div>
                             <div class="col-sm-6 mb-3">
                                 <label>DateOfJoining:</label>
-                                <input type="date" class="form-control" placeholder="Enter the DateOfJoining ..." th:field="*{dateOfJoining}" th:classappend="${#fields.hasErrors('dateOfJoining')}? 'is-invalid'">
+                                <input type="date" class="form-control" placeholder="Enter the DateOfJoining ..."
+                                       th:field="*{dateOfJoining}" required
+                                       th:classappend="${#fields.hasErrors('dateOfJoining')}? 'is-invalid'">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-6 mb-3">
-                                <label>Mobile Number:</label>
-                                <input type="text" class="form-control" placeholder="Enter the Mobile Number ..." th:field="*{mobileNumber}" th:classappend="${#fields.hasErrors('mobileNumber')}? 'is-invalid'">
+                                <label>Department:</label>
+                                <input type="text" class="form-control" placeholder="Enter the Mobile Number ..."
+                                       th:field="*{mobileNumber}"
+                                       th:classappend="${#fields.hasErrors('mobileNumber')}? 'is-invalid'">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <label>Mobile Number(Residence):</label>
-                                <input type="text" class="form-control" placeholder="Enter the Mobile Number(Residence) ..." th:field="*{mobileNumberResidence}" th:classappend="${#fields.hasErrors('mobileNumberResidence')}? 'is-invalid'">
+                                <label>Mobile Number:</label>
+                                <input type="text" class="form-control"
+                                       placeholder="Enter the Mobile Number(Residence) ..."
+                                       th:field="*{mobileNumberResidence}"
+                                       th:classappend="${#fields.hasErrors('mobileNumberResidence')}? 'is-invalid'">
                             </div>
                         </div>
 

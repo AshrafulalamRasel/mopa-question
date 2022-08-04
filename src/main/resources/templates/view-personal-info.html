@@ -38,7 +38,7 @@
             <thead>
             <tr class="text-center">
                 <th>Govt.Id</th>
-                <th>Employee Full Name<br>Email<br>Designation</th>
+                <th>Employee Full Name<br>Email<br>Designation<br>Department</th>
                 <th>Date Of Birth</th>
                 <th>Date Of Join</th>
                 <th>Mobile No</th>
@@ -55,10 +55,10 @@
             </tr>
             <tr class="text-center" th:each="responeDto: ${addPersonalInfo}">
                 <td th:text="${responeDto.govId}">${responeDto.govId}</td>
-                <td th:utext="${responeDto.employeeName} + ('<br>'+${(responeDto.email)}) + ('<br>'+${(responeDto.designation)})"></td>
+                <td th:utext="${responeDto.employeeName} + ('<br>'+${(responeDto.email)}) + ('<br>'+${(responeDto.designation)}+ ('<br>'+${(responeDto.mobileNumber)}))"></td>
                 <td th:text="${#temporals.format(responeDto.dateOfBirth, 'dd/MM/yyyy')}">dateOfBirth</td>
                 <td th:text="${#temporals.format(responeDto.dateOfJoining, 'dd/MM/yyyy')}">dateOfJoining</td>
-                <td th:text="${responeDto.mobileNumber}">mobileNumber</td>
+                <td th:text="${responeDto.mobileNumberResidence}">mobileNumberResidence</td>
                 <td th:text="${responeDto.prlApplicable}">prlApplicable</td>
                 <td th:text="${#temporals.format(responeDto.prlDate, 'dd/MM/yyyy')}">prlDate</td>
                 <td th:text="${responeDto.loggedUsers}">loggedUsers</td>

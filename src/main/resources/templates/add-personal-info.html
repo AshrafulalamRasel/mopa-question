@@ -30,12 +30,12 @@
 
                         <div class="row">
                             <div class="col-sm-6 mb-3">
-                                <label>Gov.Id:</label>
+                                <label>Employee.Id:</label>
                                 <input type="text" class="form-control" placeholder="Enter the gov.Id ..." th:field="*{govId}" th:classappend="${#fields.hasErrors('govId')}? 'is-invalid'">
                             </div>
                             <div class="col-sm-6 mb-3">
                                 <label>Employee Full Name:</label>
-                                <input type="text" class="form-control" placeholder="Enter the Employee Name ..." th:field="*{employeeName}" th:classappend="${#fields.hasErrors('employeeName')}? 'is-invalid'">
+                                <input type="text" required class="form-control" placeholder="Enter the Employee Name ..." th:field="*{employeeName}" th:classappend="${#fields.hasErrors('employeeName')}? 'is-invalid'">
                             </div>
                         </div>
 
@@ -46,14 +46,14 @@
                             </div>
                             <div class="col-sm-6 mb-3">
                                 <label>Email:</label>
-                                <input type="text" class="form-control" placeholder="Enter the Email ..." th:field="*{email}" th:classappend="${#fields.hasErrors('email')}? 'is-invalid'">
+                                <input type="text" required class="form-control" placeholder="Enter the Email ..." th:field="*{email}" th:classappend="${#fields.hasErrors('email')}? 'is-invalid'">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-6 mb-3">
                                 <label>DateOfBirth:</label>
-                                <input type="date" class="form-control" placeholder="Enter the DateOfBirth ..." th:field="*{dateOfBirth}" th:classappend="${#fields.hasErrors('dateOfBirth')}? 'is-invalid'">
+                                <input type="date" required class="form-control" placeholder="Enter the DateOfBirth ..." th:field="*{dateOfBirth}" th:classappend="${#fields.hasErrors('dateOfBirth')}? 'is-invalid'">
                             </div>
                             <div class="col-sm-6 mb-3">
                                 <label>DateOfJoining:</label>
@@ -63,12 +63,12 @@
 
                         <div class="row">
                             <div class="col-sm-6 mb-3">
-                                <label>Mobile Number:</label>
-                                <input type="text" class="form-control" placeholder="Enter the Mobile Number ..." th:field="*{mobileNumber}" th:classappend="${#fields.hasErrors('mobileNumber')}? 'is-invalid'">
+                                <label>Department</label>
+                                <input type="text" class="form-control" placeholder="Enter the Department ..." th:field="*{mobileNumber}" th:classappend="${#fields.hasErrors('mobileNumber')}? 'is-invalid'">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <label>Mobile Number(Residence):</label>
-                                <input type="text" class="form-control" placeholder="Enter the Mobile Number(Residence) ..." th:field="*{mobileNumberResidence}" th:classappend="${#fields.hasErrors('mobileNumberResidence')}? 'is-invalid'">
+                                <label>Mobile Number</label>
+                                <input type="text" class="form-control" placeholder="Enter the Mobile Number ..." th:field="*{mobileNumberResidence}" required th:classappend="${#fields.hasErrors('mobileNumberResidence')}? 'is-invalid'">
                             </div>
                         </div>
 
