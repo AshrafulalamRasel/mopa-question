@@ -64,6 +64,27 @@ public class PersonalInformationController {
         return "redirect:/personal-info";
     }
 
+    @GetMapping("/fixeduser/{id}")
+    public ModelAndView showFixedUserUpdateForm(@PathVariable String id) {
+        ModelAndView modelAndView = new ModelAndView();
+        PersonalInfoResponseDTO responseDTO = service.getPersonalInfoBy(id);
+        modelAndView.addObject("responseDTO", responseDTO);
+        modelAndView.setViewName("edit-personal-info-comment");
+        return modelAndView;
+    }
+
+
+    @PostMapping("/fixeduser/{id}")
+    public String updatefixeduserPersonalInfoBy(@PathVariable String id, @ModelAttribute("responseDTO") @Valid PersonalInfoRequestDTO requestDTO, BindingResult result, RedirectAttributes attributes) {
+        if (result.hasErrors()) {
+            return "edit-personal-info-comment";
+        }
+
+        service.updatePersonalInfoBy(id, requestDTO);
+        attributes.addFlashAttribute("message", "Personal Information updated successfully!");
+        return "redirect:/personal-info";
+    }
+
     @GetMapping("/view-prl")
     public ModelAndView showPRLForm() {
         List<PersonalInfoResponseDTO> responseDTOList = service.getAllPRLInformation();

@@ -24,7 +24,13 @@ public class PersonalInfoRequestDTO {
 
     private String mobileNumber;
 
+    private String activitiesWork;
+
     private String mobileNumberResidence;
 
     private String loggedUsers;
+
+    private String marks;
+
+    private String comments;
 }

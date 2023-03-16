@@ -57,6 +57,7 @@ public class PersonalInfoService {
             personalInfoResponseDTO.setEmployeeName(responseList.getEmployeeName());
             personalInfoResponseDTO.setEmail(responseList.getEmail());
             personalInfoResponseDTO.setDateOfBirth(responseList.getDateOfBirth());
+            personalInfoResponseDTO.setActivitiesWork(responseList.getActivitiesWork());
             personalInfoResponseDTO.setDateOfJoining(responseList.getDateOfJoining());
             personalInfoResponseDTO.setMobileNumber(responseList.getMobileNumber());
             personalInfoResponseDTO.setMobileNumberResidence(responseList.getMobileNumberResidence());
@@ -93,10 +94,6 @@ public class PersonalInfoService {
         for (PersonalInfoEntity responseList : entityList){
             LocalDate todayDate = LocalDate.now();
             LocalDate dateOfBirthDayDate = responseList.getDateOfBirth();
-            Long range = ChronoUnit.YEARS.between(dateOfBirthDayDate, todayDate);
-            if (range < 59) {
-                continue;
-            }
             PersonalInfoResponseDTO personalInfoResponseDTO = new PersonalInfoResponseDTO();
             personalInfoResponseDTO.setId(responseList.getId());
             personalInfoResponseDTO.setGovId(responseList.getGovId());
@@ -104,6 +101,7 @@ public class PersonalInfoService {
             personalInfoResponseDTO.setEmail(responseList.getEmail());
             personalInfoResponseDTO.setDateOfBirth(responseList.getDateOfBirth());
             personalInfoResponseDTO.setDateOfJoining(responseList.getDateOfJoining());
+            personalInfoResponseDTO.setActivitiesWork(responseList.getActivitiesWork());
             personalInfoResponseDTO.setMobileNumber(responseList.getMobileNumber());
             personalInfoResponseDTO.setMobileNumberResidence(responseList.getMobileNumberResidence());
             personalInfoResponseDTO.setDesignation(responseList.getDesignation());
@@ -112,6 +110,8 @@ public class PersonalInfoService {
             LocalDate prlDate = dateOfBirthDayDate.plusYears(59);
             personalInfoResponseDTO.setPrlApplicable("YES");
             personalInfoResponseDTO.setPrlDate(prlDate);
+            personalInfoResponseDTO.setMarks(responseList.getMarks());
+            personalInfoResponseDTO.setComments(responseList.getComments());
             list.add(personalInfoResponseDTO);
         }
 
@@ -158,6 +158,8 @@ public class PersonalInfoService {
         personalInfoEntity.setDateOfJoining(requestDTO.getDateOfJoining());
         personalInfoEntity.setMobileNumber(requestDTO.getMobileNumber());
         personalInfoEntity.setMobileNumberResidence(requestDTO.getMobileNumberResidence());
+        personalInfoEntity.setComments(requestDTO.getComments());
+        personalInfoEntity.setMarks(requestDTO.getMarks());
         repository.save(personalInfoEntity);
     }
 }

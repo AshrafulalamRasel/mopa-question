@@ -19,7 +19,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 class="text-center mb-4">PRL List</h1>
+    <h1 class="text-center mb-4">Personal Information List</h1>
 
     <th:block th:include="fragment/success-message.html"></th:block>
 
@@ -27,15 +27,16 @@
         <table id="example" class="table table-sm table-bordered">
             <thead>
             <tr class="text-center">
-                <th>Govt.Id</th>
-                <th>Employee Full Name<br>Email<br>Designation</th>
-                <th>Date Of Birth</th>
-                <th>Date Of Join</th>
-                <th>Mobile No</th>
-                <th>PRL Applicable</th>
-                <th>PRL Date</th>
-                <th>Creator</th>
-                <th>Created at</th>
+                <th>Govt.Id:</th>
+                <th>Employee Full Name<br>Designation</th>
+                <th>Email<br>Department:</th>
+                <th>Date Of Birth:</th>
+                <th>Period of working time:</th>
+                <th>Mobile No:</th>
+                <th>Activities That your work last:</th>
+                <th>Mark:</th>
+                <th>Comment:</th>
+                <th>Action:</th>
             </tr>
             </thead>
             <tbody>
@@ -44,15 +45,29 @@
             </tr>
             <tr class="text-center" th:each="responeDto: ${addPersonalInfo}">
                 <td th:text="${responeDto.govId}">${responeDto.govId}</td>
-                <td th:utext="${responeDto.employeeName} + ('<br>'+${(responeDto.email)}) + ('<br>'+${(responeDto.designation)})"></td>
+                <td th:utext="${responeDto.employeeName} + ('<br>'+${(responeDto.designation)})"></td>
+                <td th:utext="${responeDto.email} + ('<br>'+${(responeDto.mobileNumber)})"></td>
                 <td th:text="${#temporals.format(responeDto.dateOfBirth, 'dd/MM/yyyy')}">dateOfBirth</td>
                 <td th:text="${#temporals.format(responeDto.dateOfJoining, 'dd/MM/yyyy')}">dateOfJoining</td>
-                <td th:text="${responeDto.mobileNumber}">mobileNumber</td>
-                <td th:text="${responeDto.prlApplicable}">prlApplicable</td>
-                <td th:text="${#temporals.format(responeDto.prlDate, 'dd/MM/yyyy')}">prlDate</td>
-                <td th:text="${responeDto.loggedUsers}">loggedUsers</td>
-                <td th:text="${#temporals.format(responeDto.createdAt, 'dd/MM/yyyy HH:mm:ss')}">CreatedAt</td>
+                <td th:text="${responeDto.mobileNumberResidence}">mobileNumberResidence</td>
+                <td th:text="${responeDto.activitiesWork}">activitiesWork</td>
+                <td th:text="${responeDto.marks}">marks</td>
+                <td th:text="${responeDto.comments}">comments</td>
+                <td>
+                    <div class="btn-group">
+
+                        <div sec:authorize="hasAnyAuthority('ADMIN','REPORTED_INITIATING','COUNTER_SINGING_OFFICER')">
+                            <button type="button" class="btn btn-sm btn-outline-primary">
+                                <a th:href="@{/personal-info/fixeduser/{id}(id=${responeDto.id})}"
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-fw fa-pencil-alt"></i>
+                                </a>
+                            </button>
+                        </div>
+                    </div>
+                </td>
             </tr>
+
             </tbody>
         </table>
     </div>
@@ -75,7 +90,7 @@
         $(document).ready(function () {
             //Only needed for the filename of export files.
             //Normally set in the title tag of your page.
-            document.title = "PRL List.";
+            document.title = "Personal Information List.";
             // Create search inputs in footer
             $("#example tfoot th").each(function () {
                 var title = $(this).text();
@@ -91,7 +106,7 @@
                         text: 'Print <i class="fa fa-lg fa-print"></i>',
                         extend: 'print',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                            columns: [0, 1, 2, 3, 4, 5, 6]
                         },
                         className: 'table-btns print-btn'
                     },
@@ -99,7 +114,7 @@
                         text: 'Export to Excel <i class="fa fa-lg fa-file-excel-o"></i>',
                         extend: 'excel',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                            columns: [0, 1, 2, 3, 4, 5, 6]
                         },
                         className: 'table-btns excel-btn'
                     },

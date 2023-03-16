@@ -39,8 +39,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN","VIEW")
-				.antMatchers("/new").hasAnyAuthority("ADMIN", "CREATOR").antMatchers("/edit/**")
+		http.authorizeRequests().antMatchers("/").hasAnyAuthority("REPORTED_OFFICERS", "REPORTED_INITIATING", "COUNTER_SINGING_OFFICER", "ADMIN","VIEW")
+				.antMatchers("/new").hasAnyAuthority("ADMIN", "REPORTED_OFFICERS").antMatchers("/edit/**")
 				.hasAnyAuthority("ADMIN", "VIEW").antMatchers("/view/**")
 				.hasAnyAuthority("ADMIN", "EDITOR").antMatchers("/delete/**").hasAuthority("ADMIN")
 				.antMatchers("/h2-console/**").permitAll().anyRequest().authenticated().and().formLogin().permitAll()

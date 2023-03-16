@@ -24,7 +24,7 @@
     <div class="container mt-3">
         <div class="card">
             <div class="card-body">
-                <form method="POST" th:action="@{/personal-info/{id}(id=${responseDTO.id})}" class="mx-auto w-50"
+                <form method="POST" th:action="@{/personal-info/fixeduser/{id}(id=${responseDTO.id})}" class="mx-auto w-50"
                       th:object="${responseDTO}">
                     <th:block th:include="fragment/error-message.html"></th:block>
                     <fieldset>
@@ -65,7 +65,7 @@
                                        th:classappend="${#fields.hasErrors('dateOfBirth')}? 'is-invalid'">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <label>Period of working time::</label>
+                                <label>Period of working time:</label>
                                 <input type="date" class="form-control" placeholder="Enter the DateOfJoining ..."
                                        th:field="*{dateOfJoining}" required
                                        th:classappend="${#fields.hasErrors('dateOfJoining')}? 'is-invalid'">
@@ -86,6 +86,25 @@
                                        th:field="*{mobileNumberResidence}"
                                        th:classappend="${#fields.hasErrors('mobileNumberResidence')}? 'is-invalid'">
                             </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-6 mb-3">
+                                <label>Marks:</label>
+                                <input type="text" class="form-control" placeholder="Enter the marks ..."
+                                       th:field="*{marks}"
+                                       th:classappend="${#fields.hasErrors('marks')}? 'is-invalid'">
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <label>Comments:</label>
+                                <input type="text" class="form-control"
+                                       placeholder="Enter the Comments ..."
+                                       th:field="*{comments}"
+                                       th:classappend="${#fields.hasErrors('comments')}? 'is-invalid'">
+                            </div>
+
                         </div>
 
                     </fieldset>

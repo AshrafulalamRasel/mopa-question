@@ -30,7 +30,13 @@ public class PersonalInfoEntity extends BaseEntity {
 
     private String mobileNumberResidence;
 
+    private String activitiesWork;
+
     private String loggedUsers;
+
+    private String comments;
+
+    private String marks;
 
 
 }

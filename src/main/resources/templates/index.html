@@ -15,7 +15,7 @@
         <div class="container-fluid py-3">
             <div class="row align-items-md-stretch">
                 <div class="col-md-4">
-                    <div class="h-10 p-5 bg-light rounded-3" sec:authorize="hasAnyAuthority('ADMIN','USER')">
+                    <div class="h-10 p-5 bg-light rounded-3" sec:authorize="hasAnyAuthority('ADMIN','REPORTED_OFFICERS','REPORTED_INITIATING','COUNTER_SINGING_OFFICER')">
                         <a th:href="@{/personal-info}" class="nav-link text-dark  text-center">
                             <i class="fa fa-sitemap d-block fa-lg mx-auto mb-2" aria-hidden="true"></i>
                             Create Personal Information

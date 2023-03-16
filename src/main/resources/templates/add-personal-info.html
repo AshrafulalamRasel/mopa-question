@@ -56,19 +56,25 @@
                                 <input type="date" required class="form-control" placeholder="Enter the DateOfBirth ..." th:field="*{dateOfBirth}" th:classappend="${#fields.hasErrors('dateOfBirth')}? 'is-invalid'">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <label>DateOfJoining:</label>
+                                <label>Period of working time:</label>
                                 <input type="date" class="form-control" placeholder="Enter the DateOfJoining ..." th:field="*{dateOfJoining}" th:classappend="${#fields.hasErrors('dateOfJoining')}? 'is-invalid'">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-6 mb-3">
-                                <label>Department</label>
+                                <label>Department:</label>
                                 <input type="text" class="form-control" placeholder="Enter the Department ..." th:field="*{mobileNumber}" th:classappend="${#fields.hasErrors('mobileNumber')}? 'is-invalid'">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <label>Mobile Number</label>
+                                <label>Mobile Number:</label>
                                 <input type="text" class="form-control" placeholder="Enter the Mobile Number ..." th:field="*{mobileNumberResidence}" required th:classappend="${#fields.hasErrors('mobileNumberResidence')}? 'is-invalid'">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 mb-3">
+                                <label>Activities Last Year:</label>
+                                <input type="text" class="form-control" placeholder="Enter the Activities ..." th:field="*{activitiesWork}" th:classappend="${#fields.hasErrors('activitiesWork')}? 'is-invalid'">
                             </div>
                         </div>
 

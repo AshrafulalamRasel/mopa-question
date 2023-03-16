@@ -30,9 +30,15 @@ public class PersonalInfoResponseDTO {
 
     private String mobileNumberResidence;
 
+    private String activitiesWork;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
 
     private String loggedUsers;
+
+    private String comments;
+
+    private String marks;
 }
