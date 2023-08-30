@@ -24,12 +24,12 @@
     <th:block th:include="fragment/success-message.html"></th:block>
 
     <a th:href="@{/personal-info/add}" class="btn btn-outline-success mb-3"
-       sec:authorize="hasAnyAuthority('ADMIN','REPORTED_OFFICERS')">
+       sec:authorize="hasAnyAuthority('ADMIN','EDITOR')">
         <i class="fas fa-fw fa-user-plus"></i> Create
     </a>
 
     <a th:href="@{/personal-info/view-prl}" class="btn btn-outline-success mb-3"
-       sec:authorize="hasAnyAuthority('ADMIN','REPORTED_INITIATING','COUNTER_SINGING_OFFICER')">
+       sec:authorize="hasAnyAuthority('ADMIN','VIEW')">
         <i class="fas fa-fw fa-user-plus"></i> View List
     </a>
 
@@ -66,7 +66,7 @@
                 <td>
                     <div class="btn-group">
 
-                        <div sec:authorize="hasAnyAuthority('ADMIN','USER')">
+                        <div sec:authorize="hasAnyAuthority('ADMIN','EDITOR')">
                             <button type="button" class="btn btn-sm btn-outline-primary">
                                 <a th:href="@{/personal-info/{id}(id=${responeDto.id})}"
                                    class="btn btn-sm btn-outline-primary">
